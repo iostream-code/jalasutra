@@ -43,12 +43,8 @@ const Login = () => {
             .then((response) => {
                 successNotification();
                 localStorage.setItem('token', response.data.token);
-                console.log(response.data.user.role);
-                if (response.data.user.role === 'WARGA') {
-                    navigate('');
-                } else {
-                    navigate('');
-                }
+                console.log(response.data.data.role);
+                navigate('/');
             })
             .catch((error) => {
                 failedNotification();
