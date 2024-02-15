@@ -5,6 +5,7 @@ import Dashboard from "./views/Dashboard"
 
 import 'flowbite'
 import 'flowbite-react'
+import NotFound from "./views/error/NotFound"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<MainLayout />} >
               <Route index element={<Dashboard />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </Router>
