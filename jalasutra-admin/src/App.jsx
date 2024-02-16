@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import MainLayout from "./views/layout/MainLayout"
 import Login from "./views/auth/Login"
 import Dashboard from "./views/Dashboard"
+
 import NotFound from "./views/error/NotFound"
 
 import 'flowbite'
 import 'flowbite-react'
+import ServiceIndex from "./views/services/Index"
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<MainLayout />} >
               <Route index element={<Dashboard />} />
+              <Route path="layanan" element={<ServiceIndex />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
