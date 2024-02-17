@@ -5,7 +5,11 @@ export default {
     'node_modules/flowbite-react/lib/esm/**/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'login': "url('./src/assets/login/background.jpg')",
+      },
+    },
   },
   plugins: [
     require('flowbite/plugin')
