@@ -16,7 +16,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::with('type')->latest()->paginate(10);
+        $services = Service::with('type')->latest()->paginate(5);
 
         return new ServiceResource(true, 'List of Service', $services);
     }
@@ -62,7 +62,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        $service_detail = Service::with('type')->where('id', $service->id)->get();
+        $service_detail = Service::with('type')->where('id', $service->id)->first();
 
         return new ServiceResource(true, 'Service Detail', $service_detail);
     }

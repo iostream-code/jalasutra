@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { HiMiniPencil } from "react-icons/hi2"
+import { Link, useParams } from "react-router-dom"
+import { MdOutlineEdit } from "react-icons/md"
 import Api from "../../api"
 import Loader from "../../components/Loader"
+import Nav from "../../components/partial/Nav"
+import { Button } from "flowbite-react"
 
 const ServiceDetail = () => {
-    const [service, setService] = useState([])
+    const [name, setName] = useState("")
+    const [icon, setIcon] = useState("")
+    const [description, setDescription] = useState("")
+    const [information, setInformation] = useState("")
+    const [contact, setContact] = useState("")
+    const [type, setType] = useState("")
 
     // const token = localStorage.getItem('token')
 
@@ -15,7 +22,12 @@ const ServiceDetail = () => {
         // Api.defaults.headers.common['Authorization'] = `Bearer ${token}`
         await Api.get(`/api/services/${id}`)
             .then(response => {
-                setService(response.data.data);
+                setName(response.data.data.name);
+                setIcon(response.data.data.icon);
+                setDescription(response.data.data.description);
+                setInformation(response.data.data.information);
+                setContact(response.data.data.contact);
+                setType(response.data.data.type.type);
             })
     }
 
@@ -24,44 +36,53 @@ const ServiceDetail = () => {
         // eslint-disable-next-line
     }, [])
 
-    console.log(service)
-
-    if (!service) {
+    if (!fetchDetailService) {
         <div><Loader /></div>
     }
 
+    const parent = "layanan"
+    const page = "detail"
+
     return (
         <>
-            <div className="w-full mt-auto rounded-lg bg-white p-6 text-left align-middle shadow-lg">
-                <div className="text-lg font-medium leading-6 text-gray-900 flex justify-between items-center">
-                    <div className="flex flex-row gap-2">
-                        <h1 className="font-bold uppercase">
-                            Detail Layanan {service.name}
-                        </h1>
-                        <a href={`/admin/service/edit/${service.id}`}>
-                            <HiMiniPencil className="cursor-pointer p-1 hover:text-white rounded-full hover:bg-light-blue" fontSize={25} />
-                        </a>
-                    </div>
+            <div className="grid grid-cols-2">
+                <span>
+                    <Nav parent={parent} page={page} />
+                </span>
+                <div className="mb-4 place-self-end">
+                    <Link to={`/layanan/${id}/ubah`}>
+                        <Button color="gray">
+                            <MdOutlineEdit className="mr-2 h-5 w-5" />
+                            Ubah
+                        </Button>
+                    </Link>
                 </div>
-                <div className="mt-4 px-2 flex flex-col">
-                    <img src={service.icon} className="mx-auto rounded-full h-32" alt="Belum Ada Logo" />
+            </div>
+            <div className="w-full mt-auto rounded-lg bg-white border-t-4 border-blue-500 p-6 text-left align-middle shadow-lg">
+                <div className="text-md font-medium leading-3 text-gray-900 flex justify-between items-center">
+                    <h1 className="font-bold uppercase">
+                        Detail Layanan {name}
+                    </h1>
+                </div>
+                <div className="mt-2 px-2 flex flex-col">
+                    <img src={icon} className="mx-auto rounded-full h-24" alt="Belum Ada Logo" />
                     <div className="mt-4">
                         <dl className="divide-y divide-gray-100">
                             <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                 <dt className="text-sm font-medium leading-6 text-gray-900">Jenis</dt>
-                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{service.type}</dd>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{type}</dd>
                             </div>
                             <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                 <dt className="text-sm font-medium leading-6 text-gray-900">Deskripsi</dt>
-                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{service.description}</dd>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{description}</dd>
                             </div>
                             <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                 <dt className="text-sm font-medium leading-6 text-gray-900">Informasi</dt>
-                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{service.information}</dd>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{information}</dd>
                             </div>
                             <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                 <dt className="text-sm font-medium leading-6 text-gray-900">Kontak</dt>
-                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{service.contact}</dd>
+                                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{contact}</dd>
                             </div>
                         </dl>
                     </div>

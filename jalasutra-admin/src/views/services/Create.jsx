@@ -60,23 +60,28 @@ const ServiceCreate = () => {
     }
 
     const parent = "layanan"
-    const page = "Tambah"
+    const page = "tambah"
     return (
         <>
             <div className="grid grid-cols-2">
                 <span>
                     <Nav parent={parent} page={page} />
                 </span>
-                <div className="mb-4 place-self-end ">
+                <div className="mb-4 place-self-end">
                     <Button color="green" onClick={storeData}>
                         <MdOutlineSaveAlt className="mr-2 h-5 w-5" />
                         Simpan
                     </Button>
                 </div>
             </div>
-            <div className="bg-white rounded-lg text-black w-full overflow-y-hidden">
+            <div className="w-full p-6 bg-white rounded-lg text-black border-t-4 border-green-500 shadow-lg overflow-y-hidden">
+                <div className="text-md font-medium leading-3 text-gray-900 flex justify-between items-center">
+                    <h1 className="font-bold uppercase">
+                        Tambah Layanan Baru
+                    </h1>
+                </div>
                 <form>
-                    <div className="mt-5">
+                    <div className="mt-6">
                         <div className="grid md:grid-cols-2 md:gap-6">
                             <div className="relative z-0 w-full mb-5 group">
                                 <input type="text" name="name" id="name" onChange={(e) => setName(e.target.value)} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />

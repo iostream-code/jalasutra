@@ -30,7 +30,7 @@ const ServiceIndex = () => {
                 </span>
                 <div className="mb-4 place-self-end ">
                     <Link to="/layanan/tambah">
-                        <Button color="green">
+                        <Button color="light">
                             <MdAddCircleOutline className="mr-2 h-5 w-5" />
                             Tambah
                         </Button>
@@ -64,10 +64,10 @@ const ServiceIndex = () => {
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <a href={`/layanan/${service.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                                    Show
+                                                    Detail
                                                 </a>
                                                 <a href="#" className="font-medium text-red-600 hover:underline dark:text-red-500">
-                                                    Delete
+                                                    Hapus
                                                 </a>
                                             </Table.Cell>
                                         </Table.Row>
