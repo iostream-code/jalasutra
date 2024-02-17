@@ -31,7 +31,7 @@ class ServiceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'fk_type_id' => 'required',
-            'name' => 'required|max:10',
+            'name' => 'required|max:20',
             'icon' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048',
             'description' => 'required|max:200',
             'information' => 'required',
@@ -74,7 +74,7 @@ class ServiceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'fk_type_id' => 'required',
-            'name' => 'required|max:30',
+            'name' => 'required|max:20',
             'icon' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
             'description' => 'required',
             'information' => 'required',

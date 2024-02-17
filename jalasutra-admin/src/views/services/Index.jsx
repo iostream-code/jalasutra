@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Table } from "flowbite-react";
 import { MdAddCircleOutline } from "react-icons/md";
 import Api from "../../api/index";
@@ -18,8 +19,6 @@ const ServiceIndex = () => {
         fetchSservices();
     }, [])
 
-    console.log(services)
-
     const parent = "layanan"
     const page = null
 
@@ -30,10 +29,12 @@ const ServiceIndex = () => {
                     <Nav parent={parent} page={page} />
                 </span>
                 <div className="mb-4 place-self-end ">
-                    <Button color="green">
-                        <MdAddCircleOutline className="mr-2 h-5 w-5" />
-                        Tambah
-                    </Button>
+                    <Link to="/layanan/tambah">
+                        <Button color="green">
+                            <MdAddCircleOutline className="mr-2 h-5 w-5" />
+                            Tambah
+                        </Button>
+                    </Link>
                 </div>
             </div>
             <div className="overflow-x-auto">
@@ -62,7 +63,7 @@ const ServiceIndex = () => {
                                                 <img className="max-w-24 mx-auto" src={service.icon} alt="image description" />
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <a href="#" className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                                <a href={`/layanan/${service.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                                                     Show
                                                 </a>
                                                 <a href="#" className="font-medium text-red-600 hover:underline dark:text-red-500">
