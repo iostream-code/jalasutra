@@ -5,7 +5,7 @@ const MainLayout = () => {
     return (
         <>
             <Sidebar />
-            <div className="h-screen bg-slate-100/50">
+            <div className="h-screen">
                 <div className="p-4 sm:ml-64">
                     <div className="p-4 rounded-lg mt-14 ">
                         <Outlet />
