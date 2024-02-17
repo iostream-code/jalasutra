@@ -2,11 +2,13 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\MailController;
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ServiceController;
-use App\Http\Controllers\Api\VillageController;
 use App\Http\Controllers\Api\ServiceTypeController;
+use App\Http\Controllers\Api\VillageController;
+use App\Http\Controllers\Api\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +21,15 @@ use App\Http\Controllers\Api\ServiceTypeController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login', LoginController::class)->name('login');
+Route::post('/logout', LogoutController::class)->middleware('auth:api');
 
 Route::apiResource('/users', UserController::class);
 Route::apiResource('/services', ServiceController::class);
 Route::apiResource('/service-types', ServiceTypeController::class);
 Route::apiResource('/villages', VillageController::class);
-Route::apiResource('/mails', MailController::class);
+Route::apiResource('/mails', MailController::class)->middleware('auth:api');
