@@ -5,16 +5,21 @@ import { MdAddCircleOutline } from "react-icons/md";
 import Api from "../../api/index";
 import Nav from "../../components/partial/Nav";
 import Swal from "sweetalert2";
+import Pagination from "../../components/Pagination";
 
 const ServiceIndex = () => {
-    const [services, setServices] = useState([]);
+    const [services, setServices] = useState([])
+    const [links, setLinks] = useState([])
 
     const fetchServices = async () => {
         await Api.get('/api/services')
             .then(response => {
-                setServices(response.data.data.data);
+                setServices(response.data.data.data)
+                setLinks(response.data.data.links)
             })
     }
+
+    console.log(links)
 
     useEffect(() => {
         fetchServices();
@@ -114,6 +119,9 @@ const ServiceIndex = () => {
                         }
                     </Table.Body>
                 </Table>
+            </div>
+            <div className="flex flex-row justify-end">
+                <Pagination links={links} />
             </div>
         </>
     )
