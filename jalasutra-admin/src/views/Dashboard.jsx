@@ -7,7 +7,7 @@ import Pic5 from "../assets/dashboard/news.png"
 const Dashboard = () => {
     return (
         <>
-            <div className="p-6">
+            <div className="p-2">
                 <div className="flex flex-col">
                     <h3 className="mb-4 text-lg font-medium leading-none tracking-tight text-gray-700 dark:text-white">Selamat Datang !</h3>
                     <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Jalasutra</h1>

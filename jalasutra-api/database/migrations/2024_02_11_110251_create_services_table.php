@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('fk_type_id');
             $table->foreign('fk_type_id')->references('id')->on('service_types')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('name', 10);
+            $table->string('name', 20);
             $table->string('icon')->nullable();
             $table->string('description', 200);
             $table->text('information', 255);

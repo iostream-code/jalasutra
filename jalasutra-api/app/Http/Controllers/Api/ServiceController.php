@@ -16,7 +16,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::with('type')->latest()->paginate(10);
+        $services = Service::with('type')->latest()->paginate(5);
 
         return new ServiceResource(true, 'List of Service', $services);
     }
@@ -31,7 +31,7 @@ class ServiceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'fk_type_id' => 'required',
-            'name' => 'required|max:10',
+            'name' => 'required|max:20',
             'icon' => 'required|image|mimes:png,jpg,jpeg,webp|max:2048',
             'description' => 'required|max:200',
             'information' => 'required',
@@ -62,7 +62,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        $service_detail = Service::with('type')->where('id', $service->id)->get();
+        $service_detail = Service::with('type')->where('id', $service->id)->first();
 
         return new ServiceResource(true, 'Service Detail', $service_detail);
     }
@@ -74,7 +74,7 @@ class ServiceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'fk_type_id' => 'required',
-            'name' => 'required|max:30',
+            'name' => 'required|max:20',
             'icon' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
             'description' => 'required',
             'information' => 'required',
