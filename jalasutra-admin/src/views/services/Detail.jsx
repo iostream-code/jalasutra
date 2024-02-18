@@ -41,13 +41,13 @@ const ServiceDetail = () => {
     }
 
     const parent = "layanan"
-    const page = "detail"
+    const child = "detail"
 
     return (
         <>
             <div className="grid grid-cols-2">
                 <span>
-                    <Nav parent={parent} page={page} />
+                    <Nav parent={parent} child={child} />
                 </span>
                 <div className="mb-4 place-self-end">
                     <Link to={`/layanan/${id}/ubah`}>
@@ -59,7 +59,7 @@ const ServiceDetail = () => {
                 </div>
             </div>
             <div className="w-full mt-auto rounded-lg bg-white border-t-4 border-blue-500 p-6 text-left align-middle shadow-lg">
-                <div className="text-md font-medium leading-3 text-gray-900 flex justify-between items-center">
+                <div className="text-md font-medium leading-3 mb-4 text-gray-900 flex justify-between items-center">
                     <h1 className="font-bold uppercase">
                         Detail Layanan {name}
                     </h1>
@@ -69,19 +69,19 @@ const ServiceDetail = () => {
                     <div className="mt-4">
                         <dl className="divide-y divide-gray-100">
                             <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <dt className="text-sm font-medium leading-6 text-gray-900">Jenis</dt>
+                                <dt className="text-sm font-semibold md:font-medium leading-6 text-gray-900">Jenis</dt>
                                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{type}</dd>
                             </div>
                             <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <dt className="text-sm font-medium leading-6 text-gray-900">Deskripsi</dt>
+                                <dt className="text-sm font-semibold md:font-medium leading-6 text-gray-900">Deskripsi</dt>
                                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{description}</dd>
                             </div>
                             <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <dt className="text-sm font-medium leading-6 text-gray-900">Informasi</dt>
+                                <dt className="text-sm font-semibold md:font-medium leading-6 text-gray-900">Informasi</dt>
                                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{information}</dd>
                             </div>
                             <div className="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                                <dt className="text-sm font-medium leading-6 text-gray-900">Kontak</dt>
+                                <dt className="text-sm font-semibold md:font-medium leading-6 text-gray-900">Kontak</dt>
                                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0 capitalize">{contact}</dd>
                             </div>
                         </dl>

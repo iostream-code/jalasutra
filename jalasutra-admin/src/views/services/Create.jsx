@@ -60,12 +60,12 @@ const ServiceCreate = () => {
     }
 
     const parent = "layanan"
-    const page = "tambah"
+    const child = "tambah"
     return (
         <>
             <div className="grid grid-cols-2">
                 <span>
-                    <Nav parent={parent} page={page} />
+                    <Nav parent={parent} child={child} />
                 </span>
                 <div className="mb-4 place-self-end">
                     <Button color="green" onClick={storeData}>
