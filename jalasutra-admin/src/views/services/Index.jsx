@@ -5,24 +5,23 @@ import { MdAddCircleOutline } from "react-icons/md";
 import Api from "../../api/index";
 import Nav from "../../components/partial/Nav";
 import Swal from "sweetalert2";
-import Pagination from "../../components/Pagination";
 
 const ServiceIndex = () => {
     const [services, setServices] = useState([])
     const [links, setLinks] = useState([])
 
-    const fetchServices = async () => {
-        await Api.get('/api/services')
+    const url = '/api/services'
+
+    const fetchServices = async (url) => {
+        await Api.get(url)
             .then(response => {
                 setServices(response.data.data.data)
-                setLinks(response.data.data.links)
+                setLinks(response.data.data)
             })
     }
 
-    console.log(links)
-
     useEffect(() => {
-        fetchServices();
+        fetchServices(url);
     }, [])
 
     function deleteConfirmation(id) {
@@ -54,6 +53,10 @@ const ServiceIndex = () => {
             })
     }
 
+    const handlePage = (url) => {
+        fetchServices(url)
+    }
+
     const parent = "layanan"
     const child = null
 
@@ -72,7 +75,7 @@ const ServiceIndex = () => {
                     </Link>
                 </div>
             </div>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto mb-4">
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
@@ -120,9 +123,40 @@ const ServiceIndex = () => {
                     </Table.Body>
                 </Table>
             </div>
-            <div className="flex flex-row justify-end">
-                <Pagination links={links} />
-            </div>
+            {
+                links.last_page > 1 &&
+                <div className="flex flex-row justify-end">
+                    <nav aria-label="Page navigation example">
+                        <ul className="flex items-center -space-x-px h-10 text-base rounded-lg bg-slate-300 p-2">
+                            {
+                                links.links.map((link, index) => {
+                                    return (
+                                        link.active ?
+                                            <li key={index}>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handlePage(link.url)}
+                                                    aria-current="page"
+                                                    className="z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
+                                                    {link.label.replace('&laquo;', '').replace('&raquo;', '')}
+                                                </button>
+                                            </li>
+                                            :
+                                            <li key={index}>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handlePage(link.url)}
+                                                    className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                                    {link.label.replace('&laquo;', '').replace('&raquo;', '')}
+                                                </button>
+                                            </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            }
         </>
     )
 }
