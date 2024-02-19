@@ -75,7 +75,6 @@ class ServiceController extends Controller
         $validator = Validator::make($request->all(), [
             'fk_type_id' => 'required',
             'name' => 'required|max:20',
-            'icon' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
             'description' => 'required',
             'information' => 'required',
             'contact' => 'required',
@@ -86,6 +85,14 @@ class ServiceController extends Controller
         }
 
         if ($request->hasFile('icon')) {
+            $validation_img = Validator::make($request->icon, [
+                'icon' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
+            ]);
+
+            if ($validation_img->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
             $icon = $request->file('icon');
             $icon->storeAs('public/services', $icon->hashName());
 
