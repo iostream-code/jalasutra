@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { MdOutlineEdit } from "react-icons/md"
 import Api from "../../api"
-import Loader from "../../components/Loader"
 import Nav from "../../components/partial/Nav"
 import { Button } from "flowbite-react"
 
@@ -35,10 +34,6 @@ const ServiceDetail = () => {
         fetchDetailService()
         // eslint-disable-next-line
     }, [])
-
-    if (!fetchDetailService) {
-        <div><Loader /></div>
-    }
 
     const parent = "layanan"
     const child = "detail"

@@ -3,10 +3,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import MainLayout from "./views/layout/MainLayout"
 import Login from "./views/auth/Login"
 import Dashboard from "./views/Dashboard"
+
 import ServiceIndex from "./views/services/Index"
 import ServiceCreate from "./views/services/Create"
 import ServiceDetail from "./views/services/Detail"
 import ServiceEdit from "./views/services/Edit"
+
+import UserIndex from "./views/users/Index"
+import UserCreate from "./views/users/Create"
+import UserDetail from "./views/users/Detail"
+import UserEdit from "./views/users/Edit"
 
 import NotFound from "./views/error/NotFound"
 
@@ -26,6 +32,10 @@ function App() {
               <Route path="layanan/tambah" element={<ServiceCreate />} />
               <Route path="layanan/:id" element={<ServiceDetail />} />
               <Route path="layanan/:id/ubah" element={<ServiceEdit />} />
+              <Route path="pengguna" element={<UserIndex />} />
+              <Route path="pengguna/tambah" element={<UserCreate />} />
+              <Route path="pengguna/:id" element={<UserDetail />} />
+              <Route path="pengguna/:id/ubah" element={<UserEdit />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

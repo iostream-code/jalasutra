@@ -20,6 +20,6 @@ class Village extends Model
 
     public function profile()
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class, 'fk_village_id');
     }
 }
