@@ -9,6 +9,11 @@ import ServiceCreate from "./views/services/Create"
 import ServiceDetail from "./views/services/Detail"
 import ServiceEdit from "./views/services/Edit"
 
+import ServiceTypeIndex from "./views/service-types/Index"
+import ServiceTypeCreate from "./views/service-types/Create"
+import ServiceTypeDetail from "./views/service-types/Detail"
+import ServiceTypeEdit from "./views/service-types/Edit"
+
 import UserIndex from "./views/users/Index"
 import UserCreate from "./views/users/Create"
 import UserDetail from "./views/users/Detail"
@@ -32,6 +37,10 @@ function App() {
               <Route path="layanan/tambah" element={<ServiceCreate />} />
               <Route path="layanan/:id" element={<ServiceDetail />} />
               <Route path="layanan/:id/ubah" element={<ServiceEdit />} />
+              <Route path="jenis-layanan" element={<ServiceTypeIndex />} />
+              <Route path="jenis-layanan/tambah" element={<ServiceTypeCreate />} />
+              <Route path="jenis-layanan/:id" element={<ServiceTypeDetail />} />
+              <Route path="jenis-layanan/:id/ubah" element={<ServiceTypeEdit />} />
               <Route path="pengguna" element={<UserIndex />} />
               <Route path="pengguna/tambah" element={<UserCreate />} />
               <Route path="pengguna/:id" element={<UserDetail />} />

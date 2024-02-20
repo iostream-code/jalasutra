@@ -76,7 +76,6 @@ const ServiceEdit = () => {
             })
             .catch(error => {
                 setErrors(error.response.data);
-                console.log(error.response.data);
             })
     }
 
