@@ -1,32 +1,32 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Table } from "flowbite-react";
-import { MdAddCircleOutline } from "react-icons/md";
-import Api from "../../api/index";
-import Nav from "../../components/partial/Nav";
-import Swal from "sweetalert2";
+import { useEffect, useState } from "react"
+import Api from "../../api"
+import Swal from "sweetalert2"
+import Nav from "../../components/partial/Nav"
+import { Link } from "react-router-dom"
+import { Button, Table } from "flowbite-react"
+import { MdAddCircleOutline } from "react-icons/md"
 
-const ServiceIndex = () => {
-    const [services, setServices] = useState([])
+const ServiceTypeIndex = () => {
+    const [serviceTypes, setServiceTypes] = useState([])
     const [links, setLinks] = useState([])
 
-    const url = '/api/services'
+    const url = 'api/service-types'
 
-    const fetchServices = async (url) => {
+    const fetchServiceTypes = async (url) => {
         await Api.get(url)
             .then(response => {
-                setServices(response.data.data.data)
+                setServiceTypes(response.data.data.data)
                 setLinks(response.data.data)
             })
     }
 
     useEffect(() => {
-        fetchServices(url)
+        fetchServiceTypes(url)
     }, [])
 
     function deleteConfirmation(id) {
         Swal.fire({
-            title: "Apakah Anda yakin menghapus layanan ini?",
+            title: "Apakah Anda yakin menghapus jenis layanan ini?",
             text: "Mohon periksa kembali!",
             icon: "warning",
             showCancelButton: true,
@@ -39,7 +39,7 @@ const ServiceIndex = () => {
                 deleteService(id);
                 Swal.fire({
                     title: "Dihapus!",
-                    text: "Layanan telah dihapus.",
+                    text: "Jenis layanan telah dihapus.",
                     icon: "success"
                 });
             }
@@ -47,17 +47,17 @@ const ServiceIndex = () => {
     }
 
     const deleteService = async (id) => {
-        await Api.delete(`/api/services/${id}`)
+        await Api.delete(`/api/service-types/${id}`)
             .then(() => {
-                fetchServices();
+                fetchServiceTypes()
             })
     }
 
     const handlePage = (url) => {
-        fetchServices(url)
+        fetchServiceTypes(url)
     }
 
-    const parent = "layanan"
+    const parent = "jenis layanan"
     const child = null
 
     return (
@@ -67,7 +67,7 @@ const ServiceIndex = () => {
                     <Nav parent={parent} child={child} />
                 </span>
                 <div className="mb-4 place-self-end ">
-                    <Link to="/layanan/tambah">
+                    <Link to="/jenis-layanan/tambah">
                         <Button color="light">
                             <MdAddCircleOutline className="mr-2 h-5 w-5" />
                             Tambah
@@ -80,7 +80,6 @@ const ServiceIndex = () => {
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
                         <Table.HeadCell>Nama</Table.HeadCell>
-                        <Table.HeadCell>Jenis</Table.HeadCell>
                         <Table.HeadCell>Deskripsi</Table.HeadCell>
                         <Table.HeadCell>Gambar</Table.HeadCell>
                         <Table.HeadCell>
@@ -89,20 +88,19 @@ const ServiceIndex = () => {
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {
-                            services.length > 0 ?
-                                services.map((service, index) => {
+                            serviceTypes.length > 0 ?
+                                serviceTypes.map((service, index) => {
                                     return (
                                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
                                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{service.id}</Table.Cell>
-                                            <Table.Cell>{service.name}</Table.Cell>
-                                            <Table.Cell>{service.type.type}</Table.Cell>
-                                            <Table.Cell>{service.description}</Table.Cell>
+                                            <Table.Cell>{service.type}</Table.Cell>
+                                            <Table.Cell>Non nulla reprehenderit fugiat elit reprehenderit ipsum. Consectetur labore ea in occaecat eu. Eu exercitation sit enim incididunt.</Table.Cell>
                                             <Table.Cell>
-                                                <img className="max-w-24 mx-auto" src={service.icon} alt="image description" />
+                                                <img className="max-w-14" src={service.icon} alt="image description" />
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <div className="flex items-center">
-                                                    <a href={`/layanan/${service.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                                    <a href={`/jenis-layanan/${service.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                                                         Detail
                                                     </a>
                                                     <button type="button" onClick={() => deleteConfirmation(service.id)} className="font-medium text-red-600 hover:underline dark:text-red-500">
@@ -161,4 +159,4 @@ const ServiceIndex = () => {
     )
 }
 
-export default ServiceIndex
+export default ServiceTypeIndex

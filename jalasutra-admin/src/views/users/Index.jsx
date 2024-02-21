@@ -1,32 +1,31 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Table } from "flowbite-react";
-import { MdAddCircleOutline } from "react-icons/md";
-import Api from "../../api/index";
-import Nav from "../../components/partial/Nav";
-import Swal from "sweetalert2";
+import { useEffect, useState } from "react"
+import { Button, Table } from "flowbite-react"
+import { MdAddCircleOutline } from "react-icons/md"
+import Api from "../../api/index"
+import Swal from "sweetalert2"
+import Nav from "../../components/partial/Nav"
 
-const ServiceIndex = () => {
-    const [services, setServices] = useState([])
+const UserIndex = () => {
+    const [users, setUsers] = useState([])
     const [links, setLinks] = useState([])
 
-    const url = '/api/services'
+    const url = '/api/users'
 
-    const fetchServices = async (url) => {
+    const fetchUsers = async (url) => {
         await Api.get(url)
             .then(response => {
-                setServices(response.data.data.data)
+                setUsers(response.data.data.data)
                 setLinks(response.data.data)
             })
     }
 
     useEffect(() => {
-        fetchServices(url)
+        fetchUsers(url)
     }, [])
 
     function deleteConfirmation(id) {
         Swal.fire({
-            title: "Apakah Anda yakin menghapus layanan ini?",
+            title: "Apakah Anda yakin menghapus pengguna ini?",
             text: "Mohon periksa kembali!",
             icon: "warning",
             showCancelButton: true,
@@ -39,7 +38,7 @@ const ServiceIndex = () => {
                 deleteService(id);
                 Swal.fire({
                     title: "Dihapus!",
-                    text: "Layanan telah dihapus.",
+                    text: "Data pengguna telah dihapus.",
                     icon: "success"
                 });
             }
@@ -47,17 +46,17 @@ const ServiceIndex = () => {
     }
 
     const deleteService = async (id) => {
-        await Api.delete(`/api/services/${id}`)
+        await Api.delete(`/api/users/${id}`)
             .then(() => {
-                fetchServices();
+                fetchUsers();
             })
     }
 
     const handlePage = (url) => {
-        fetchServices(url)
+        fetchUsers(url)
     }
 
-    const parent = "layanan"
+    const parent = "pengguna"
     const child = null
 
     return (
@@ -67,45 +66,48 @@ const ServiceIndex = () => {
                     <Nav parent={parent} child={child} />
                 </span>
                 <div className="mb-4 place-self-end ">
-                    <Link to="/layanan/tambah">
+                    <a href="/pengguna/tambah">
                         <Button color="light">
                             <MdAddCircleOutline className="mr-2 h-5 w-5" />
                             Tambah
                         </Button>
-                    </Link>
+                    </a>
                 </div>
             </div>
             <div className="overflow-x-auto mb-4">
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
-                        <Table.HeadCell>Nama</Table.HeadCell>
-                        <Table.HeadCell>Jenis</Table.HeadCell>
-                        <Table.HeadCell>Deskripsi</Table.HeadCell>
-                        <Table.HeadCell>Gambar</Table.HeadCell>
+                        <Table.HeadCell>Username</Table.HeadCell>
+                        <Table.HeadCell>Email</Table.HeadCell>
+                        <Table.HeadCell>Role</Table.HeadCell>
                         <Table.HeadCell>
-                            <span className="sr-only">Edit</span>
+                            <span className="sr-only">Aksi</span>
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {
-                            services.length > 0 ?
-                                services.map((service, index) => {
+                            users.length > 0 ?
+                                users.map((user, index) => {
                                     return (
                                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{service.id}</Table.Cell>
-                                            <Table.Cell>{service.name}</Table.Cell>
-                                            <Table.Cell>{service.type.type}</Table.Cell>
-                                            <Table.Cell>{service.description}</Table.Cell>
-                                            <Table.Cell>
-                                                <img className="max-w-24 mx-auto" src={service.icon} alt="image description" />
+                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{user.id}</Table.Cell>
+                                            <Table.Cell>{user.username}</Table.Cell>
+                                            <Table.Cell>{user.email}</Table.Cell>
+                                            <Table.Cell className="lowercase">
+                                                {
+                                                    user.role == 'KECAMATAN' || user.role == 'DESA' ?
+                                                        <span className="bg-purple-100 text-purple-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">{user.role}</span>
+                                                        :
+                                                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{user.role}</span>
+                                                }
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <div className="flex items-center">
-                                                    <a href={`/layanan/${service.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                                    <a href={`/pengguna/${user.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                                                         Detail
                                                     </a>
-                                                    <button type="button" onClick={() => deleteConfirmation(service.id)} className="font-medium text-red-600 hover:underline dark:text-red-500">
+                                                    <button type="button" onClick={() => deleteConfirmation(user.id)} className="font-medium text-red-600 hover:underline dark:text-red-500">
                                                         Hapus
                                                     </button>
                                                 </div>
@@ -161,4 +163,4 @@ const ServiceIndex = () => {
     )
 }
 
-export default ServiceIndex
+export default UserIndex

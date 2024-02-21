@@ -39,7 +39,7 @@ class ServiceTypeController extends Controller
         $icon->storeAs('public/service-types', $icon->hashName());
 
         $service_type = ServiceType::create([
-            'name' => $request->type,
+            'type' => $request->type,
             'icon' => $icon->hashName(),
         ]);
 
@@ -61,7 +61,6 @@ class ServiceTypeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'type' => 'required|max:10',
-            'icon' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -69,6 +68,14 @@ class ServiceTypeController extends Controller
         }
 
         if ($request->hasFile('icon')) {
+            $validation_img = Validator::make($request->only('icon'), [
+                'icon' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
             $icon = $request->file('icon');
             $icon->storeAs('public/service-types', $icon->hashName());
 

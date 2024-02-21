@@ -28,6 +28,7 @@ class ProfileSeeder extends Seeder
                 'address' => $faker->address(),
                 'job' => $faker->jobTitle(),
                 'marital_status' => $faker->randomElement(['married', 'single', 'divorced']),
+                'photo' => 'default/blank-profile-picture.jpg',
             ],
             [
                 'fk_user_id' => 2,
@@ -39,6 +40,7 @@ class ProfileSeeder extends Seeder
                 'address' => $faker->address(),
                 'job' => $faker->jobTitle(),
                 'marital_status' => $faker->randomElement(['married', 'single', 'divorced']),
+                'photo' => 'default/blank-profile-picture.jpg',
             ],
             [
                 'fk_user_id' => 3,
@@ -50,6 +52,7 @@ class ProfileSeeder extends Seeder
                 'address' => $faker->address(),
                 'job' => $faker->jobTitle(),
                 'marital_status' => $faker->randomElement(['married', 'single', 'divorced']),
+                'photo' => 'default/blank-profile-picture.jpg',
             ],
             [
                 'fk_user_id' => 4,
@@ -61,6 +64,7 @@ class ProfileSeeder extends Seeder
                 'address' => $faker->address(),
                 'job' => $faker->jobTitle(),
                 'marital_status' => $faker->randomElement(['married', 'single', 'divorced']),
+                'photo' => 'default/blank-profile-picture.jpg',
             ],
             [
                 'fk_user_id' => 5,
@@ -72,6 +76,7 @@ class ProfileSeeder extends Seeder
                 'address' => $faker->address(),
                 'job' => $faker->jobTitle(),
                 'marital_status' => $faker->randomElement(['married', 'single', 'divorced']),
+                'photo' => 'default/blank-profile-picture.jpg',
             ],
             [
                 'fk_user_id' => 6,
@@ -83,6 +88,7 @@ class ProfileSeeder extends Seeder
                 'address' => $faker->address(),
                 'job' => $faker->jobTitle(),
                 'marital_status' => $faker->randomElement(['married', 'single', 'divorced']),
+                'photo' => 'default/blank-profile-picture.jpg',
             ],
         ];
 

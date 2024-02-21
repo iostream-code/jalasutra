@@ -16,10 +16,13 @@ class Village extends Model
      */
     protected $fillable = [
         'name',
+        'head_village',
+        'region',
+        'address',
     ];
 
     public function profile()
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class, 'fk_village_id');
     }
 }

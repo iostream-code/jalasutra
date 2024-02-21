@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('profile')->latest()->paginate(10);
+        $users = User::with('profile')->latest()->paginate(5);
 
         return new UserResource(true, 'List of User', $users);
     }
@@ -115,7 +115,6 @@ class UserController extends Controller
             'full_name' => 'required|max:50',
             'birth' => 'required',
             'address' => 'required|max:255',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ], [
             // Required error message doesn't need to show on User, just adding required attribute on Input Field
             'username.max' => 'Username maksimal terdiri dari 30 karakter.',
@@ -124,7 +123,6 @@ class UserController extends Controller
             'identity_id.numeric' => 'NIK harus berisikan angka, silahkan periksa kembali.',
             'full_name.min' => 'Nama Lengkap maksimal terdiri dari 50 karakter.',
             'address.max' => 'Alamat maksimal terdiri dari 200 karakter.',
-            'photo.mimes' => 'Foto harus memiliki format jpeg, png, jpg, atau webp.',
         ]);
 
         if ($validator->fails()) {
@@ -143,6 +141,16 @@ class UserController extends Controller
         $user_profile = Profile::where('fk_user_id', $user->id)->first();
 
         if ($request->hasFile('photo')) {
+            $validation_img = Validator::make($request->icon, [
+                'photo' => 'image|mimes:png,jpg,jpeg,webp|max:2048',
+            ], [
+                'photo.mimes' => 'Foto harus memiliki format jpeg, png, jpg, atau webp.',
+            ]);
+
+            if ($validation_img->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+
             $photo = $request->file('photo');
             $photo->storeAs('public/profiles', $photo->hashName());
 
