@@ -1,32 +1,32 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Table } from "flowbite-react";
-import { MdAddCircleOutline } from "react-icons/md";
-import Api from "../../api/index";
-import Nav from "../../components/partial/Nav";
-import Swal from "sweetalert2";
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import { Button, Table } from "flowbite-react"
+import { MdAddCircleOutline, MdLocationOn, MdLocationCity } from "react-icons/md"
+import Api from "../../api"
+import Swal from "sweetalert2"
+import Nav from "../../components/partial/Nav"
 
-const ServiceIndex = () => {
-    const [services, setServices] = useState([])
+const VillageIndex = () => {
+    const [villages, setVillages] = useState([])
     const [links, setLinks] = useState([])
 
-    const url = '/api/services'
+    const url = "/api/villages"
 
-    const fetchServices = async (url) => {
+    const fetchVillages = async (url) => {
         await Api.get(url)
             .then(response => {
-                setServices(response.data.data.data)
+                setVillages(response.data.data.data)
                 setLinks(response.data.data)
             })
     }
 
     useEffect(() => {
-        fetchServices(url)
+        fetchVillages(url)
     }, [])
 
     function deleteConfirmation(id) {
         Swal.fire({
-            title: "Apakah Anda yakin menghapus layanan ini?",
+            title: "Apakah Anda yakin menghapus desa ini?",
             text: "Mohon periksa kembali!",
             icon: "warning",
             showCancelButton: true,
@@ -36,28 +36,28 @@ const ServiceIndex = () => {
             cancelButtonText: "Tidak",
         }).then((result) => {
             if (result.isConfirmed) {
-                deleteService(id);
+                deleteVillage(id);
                 Swal.fire({
                     title: "Dihapus!",
-                    text: "Layanan telah dihapus.",
+                    text: "Desa telah dihapus.",
                     icon: "success"
                 });
             }
         });
     }
 
-    const deleteService = async (id) => {
-        await Api.delete(`/api/services/${id}`)
+    const deleteVillage = async (id) => {
+        await Api.delete(`/api/villages/${id}`)
             .then(() => {
-                fetchServices();
+                fetchVillages(url);
             })
     }
 
     const handlePage = (url) => {
-        fetchServices(url)
+        fetchVillages(url)
     }
 
-    const parent = "layanan"
+    const parent = "desa"
     const child = null
 
     return (
@@ -67,7 +67,7 @@ const ServiceIndex = () => {
                     <Nav parent={parent} child={child} />
                 </span>
                 <div className="mb-4 place-self-end ">
-                    <Link to="/layanan/tambah">
+                    <Link to="/desa/tambah">
                         <Button color="light">
                             <MdAddCircleOutline className="mr-2 h-5 w-5" />
                             Tambah
@@ -80,32 +80,40 @@ const ServiceIndex = () => {
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
                         <Table.HeadCell>Nama</Table.HeadCell>
-                        <Table.HeadCell>Jenis</Table.HeadCell>
-                        <Table.HeadCell>Deskripsi</Table.HeadCell>
-                        <Table.HeadCell>Gambar</Table.HeadCell>
+                        <Table.HeadCell>Kepala Desa</Table.HeadCell>
+                        <Table.HeadCell>Wilayah</Table.HeadCell>
+                        <Table.HeadCell>Lokasi Kantor</Table.HeadCell>
                         <Table.HeadCell>
                             <span className="sr-only">Edit</span>
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {
-                            services.length > 0 ?
-                                services.map((service, index) => {
+                            villages.length > 0 ?
+                                villages.map((village, index) => {
                                     return (
                                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{service.id}</Table.Cell>
-                                            <Table.Cell>{service.name}</Table.Cell>
-                                            <Table.Cell>{service.type.type}</Table.Cell>
-                                            <Table.Cell>{service.description}</Table.Cell>
+                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{index + 1}</Table.Cell>
+                                            <Table.Cell>{village.name}</Table.Cell>
+                                            <Table.Cell>{village.head_village}</Table.Cell>
                                             <Table.Cell>
-                                                <img className="max-w-24 mx-auto" src={service.icon} alt="image description" />
+                                                <a href={village.region} className="inline-flex text-sm font-medium items-center text-blue-600 hover:underline">
+                                                    <MdLocationOn className="w-4 h-4 me-2" />
+                                                    Wilayah Desa {village.name}
+                                                </a>
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                <a href={village.address} className="inline-flex text-sm font-medium items-center text-blue-600 hover:underline">
+                                                    <MdLocationCity className="w-4 h-4 me-2" />
+                                                    Lokasi Kantor Desa {village.name}
+                                                </a>
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <div className="flex items-center">
-                                                    <a href={`/layanan/${service.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                                    <a href={`/desa/${village.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                                                         Detail
                                                     </a>
-                                                    <button type="button" onClick={() => deleteConfirmation(service.id)} className="font-medium text-red-600 hover:underline dark:text-red-500">
+                                                    <button type="button" onClick={() => deleteConfirmation(village.id)} className="font-medium text-red-600 hover:underline dark:text-red-500">
                                                         Hapus
                                                     </button>
                                                 </div>
@@ -161,4 +169,4 @@ const ServiceIndex = () => {
     )
 }
 
-export default ServiceIndex
+export default VillageIndex

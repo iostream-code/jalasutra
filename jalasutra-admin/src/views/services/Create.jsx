@@ -51,7 +51,6 @@ const ServiceCreate = () => {
             })
             .catch(error => {
                 setErrors(error.response.data);
-                // console.log(error.response.data);
             })
     }
 
@@ -61,6 +60,7 @@ const ServiceCreate = () => {
 
     const parent = "layanan"
     const child = "tambah"
+
     return (
         <>
             <div className="grid grid-cols-2">

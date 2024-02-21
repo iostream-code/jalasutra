@@ -27,6 +27,9 @@ class VillageController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:30',
+            'head_village' => 'required',
+            'region' => 'required',
+            'address' => 'required',
         ], [
             'name.max' => 'Kolom nama maksimal berisikan 30 karakter',
         ]);
@@ -37,6 +40,9 @@ class VillageController extends Controller
 
         $village = Village::create([
             'name' => $request->name,
+            'head_village' => $request->head_village,
+            'region' => $request->region,
+            'address' => $request->address,
         ]);
 
         return new VillageResource(true, 'New Village successfully added !', $village);
@@ -57,6 +63,9 @@ class VillageController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:30',
+            'head_village' => 'required',
+            'region' => 'required',
+            'address' => 'required',
         ], [
             'name.max' => 'Kolom nama maksimal berisikan 30 karakter',
         ]);
@@ -67,6 +76,9 @@ class VillageController extends Controller
 
         $village->update([
             'name' => $request->name,
+            'head_village' => $request->head_village,
+            'region' => $request->region,
+            'address' => $request->address,
         ]);
 
         return new VillageResource(true, 'Village update successfully !', $village);
