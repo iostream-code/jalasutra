@@ -19,6 +19,11 @@ import UserCreate from "./views/users/Create"
 import UserDetail from "./views/users/Detail"
 import UserEdit from "./views/users/Edit"
 
+import VillageIndex from "./views/villages/Index"
+import VillageCreate from "./views/villages/Create"
+import VillageDetail from "./views/villages/Detail"
+import VillageEdit from "./views/villages/Edit"
+
 import NotFound from "./views/error/NotFound"
 
 import 'flowbite'
@@ -45,6 +50,10 @@ function App() {
               <Route path="pengguna/tambah" element={<UserCreate />} />
               <Route path="pengguna/:id" element={<UserDetail />} />
               <Route path="pengguna/:id/ubah" element={<UserEdit />} />
+              <Route path="desa" element={<VillageIndex />} />
+              <Route path="desa/tambah" element={<VillageCreate />} />
+              <Route path="desa/:id" element={<VillageDetail />} />
+              <Route path="desa/:id/ubah" element={<VillageEdit />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

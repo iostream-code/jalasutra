@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Button } from "flowbite-react"
-import { MdOutlineSaveAlt } from "react-icons/md"
+import { MdOutlineSaveAs } from "react-icons/md"
 import Api from "../../api"
 import Swal from "sweetalert2"
 import Nav from "../../components/partial/Nav"
@@ -77,23 +77,23 @@ const ServiceTypeEdit = () => {
                     <Nav parent={parent} child={child} />
                 </span>
                 <div className="mb-4 place-self-end">
-                    <Button color="green" onClick={updateData}>
-                        <MdOutlineSaveAlt className="mr-2 h-5 w-5" />
+                    <Button color="yellow" onClick={updateData}>
+                        <MdOutlineSaveAs className="mr-2 h-5 w-5" />
                         Simpan
                     </Button>
                 </div>
             </div>
-            <div className="w-full p-6 bg-white rounded-lg text-black border-t-4 border-green-500 shadow-lg overflow-y-hidden">
+            <div className="w-full p-6 bg-white rounded-lg text-black border-t-4 border-yellow-300 shadow-lg overflow-y-hidden">
                 <div className="text-md font-medium leading-3 text-gray-900 flex justify-between items-center">
                     <h1 className="font-bold uppercase">
-                        Tambah Layanan Baru
+                        Ubah Jenis Layanan
                     </h1>
                 </div>
                 <form>
                     <div className="mt-6">
                         <div className="grid md:grid-cols-2 md:gap-6">
                             <div className="relative z-0 w-full mb-5 group">
-                                <input type="text" name="type" id="name" onChange={(e) => setName(e.target.value)} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                                <input type="text" name="type" value={name} id="name" onChange={(e) => setName(e.target.value)} className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                                 <label htmlFor="name" className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama Jenis Layanan</label>
                                 {
                                     errors.name && (

@@ -74,6 +74,7 @@ const UserCreate = () => {
 
     const parent = "pengguna"
     const child = "tambah"
+
     return (
         <>
             <div className="grid grid-cols-2">

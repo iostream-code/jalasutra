@@ -1,31 +1,32 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { Button, Table } from "flowbite-react"
-import { MdAddCircleOutline } from "react-icons/md"
-import Api from "../../api/index"
+import { MdAddCircleOutline, MdLocationOn, MdLocationCity } from "react-icons/md"
+import Api from "../../api"
 import Swal from "sweetalert2"
 import Nav from "../../components/partial/Nav"
 
-const UserIndex = () => {
-    const [users, setUsers] = useState([])
+const VillageIndex = () => {
+    const [villages, setVillages] = useState([])
     const [links, setLinks] = useState([])
 
-    const url = '/api/users'
+    const url = "/api/villages"
 
-    const fetchUsers = async (url) => {
+    const fetchVillages = async (url) => {
         await Api.get(url)
             .then(response => {
-                setUsers(response.data.data.data)
+                setVillages(response.data.data.data)
                 setLinks(response.data.data)
             })
     }
 
     useEffect(() => {
-        fetchUsers(url)
+        fetchVillages(url)
     }, [])
 
     function deleteConfirmation(id) {
         Swal.fire({
-            title: "Apakah Anda yakin menghapus pengguna ini?",
+            title: "Apakah Anda yakin menghapus desa ini?",
             text: "Mohon periksa kembali!",
             icon: "warning",
             showCancelButton: true,
@@ -35,28 +36,28 @@ const UserIndex = () => {
             cancelButtonText: "Tidak",
         }).then((result) => {
             if (result.isConfirmed) {
-                deleteService(id);
+                deleteVillage(id);
                 Swal.fire({
                     title: "Dihapus!",
-                    text: "Data pengguna telah dihapus.",
+                    text: "Desa telah dihapus.",
                     icon: "success"
                 });
             }
         });
     }
 
-    const deleteService = async (id) => {
-        await Api.delete(`/api/users/${id}`)
+    const deleteVillage = async (id) => {
+        await Api.delete(`/api/villages/${id}`)
             .then(() => {
-                fetchUsers();
+                fetchVillages(url);
             })
     }
 
     const handlePage = (url) => {
-        fetchUsers(url)
+        fetchVillages(url)
     }
 
-    const parent = "pengguna"
+    const parent = "desa"
     const child = null
 
     return (
@@ -66,48 +67,53 @@ const UserIndex = () => {
                     <Nav parent={parent} child={child} />
                 </span>
                 <div className="mb-4 place-self-end ">
-                    <a href="/pengguna/tambah">
+                    <Link to="/desa/tambah">
                         <Button color="light">
                             <MdAddCircleOutline className="mr-2 h-5 w-5" />
                             Tambah
                         </Button>
-                    </a>
+                    </Link>
                 </div>
             </div>
             <div className="overflow-x-auto mb-4">
                 <Table hoverable>
                     <Table.Head>
                         <Table.HeadCell>No</Table.HeadCell>
-                        <Table.HeadCell>Username</Table.HeadCell>
-                        <Table.HeadCell>Email</Table.HeadCell>
-                        <Table.HeadCell>Role</Table.HeadCell>
+                        <Table.HeadCell>Nama</Table.HeadCell>
+                        <Table.HeadCell>Kepala Desa</Table.HeadCell>
+                        <Table.HeadCell>Wilayah</Table.HeadCell>
+                        <Table.HeadCell>Lokasi Kantor</Table.HeadCell>
                         <Table.HeadCell>
-                            <span className="sr-only">Aksi</span>
+                            <span className="sr-only">Edit</span>
                         </Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {
-                            users.length > 0 ?
-                                users.map((user, index) => {
+                            villages.length > 0 ?
+                                villages.map((village, index) => {
                                     return (
                                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{user.id}</Table.Cell>
-                                            <Table.Cell>{user.username}</Table.Cell>
-                                            <Table.Cell>{user.email}</Table.Cell>
-                                            <Table.Cell className="lowercase">
-                                                {
-                                                    user.role == 'KECAMATAN' || user.role == 'DESA' ?
-                                                        <span className="bg-purple-100 text-purple-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300">{user.role}</span>
-                                                        :
-                                                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{user.role}</span>
-                                                }
+                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{index + 1}</Table.Cell>
+                                            <Table.Cell>{village.name}</Table.Cell>
+                                            <Table.Cell>{village.head_village}</Table.Cell>
+                                            <Table.Cell>
+                                                <a href={village.region} className="inline-flex text-sm font-medium items-center text-blue-600 hover:underline">
+                                                    <MdLocationOn className="w-4 h-4 me-2" />
+                                                    Wilayah Desa {village.name}
+                                                </a>
+                                            </Table.Cell>
+                                            <Table.Cell>
+                                                <a href={village.address} className="inline-flex text-sm font-medium items-center text-blue-600 hover:underline">
+                                                    <MdLocationCity className="w-4 h-4 me-2" />
+                                                    Lokasi Kantor Desa {village.name}
+                                                </a>
                                             </Table.Cell>
                                             <Table.Cell>
                                                 <div className="flex items-center">
-                                                    <a href={`/pengguna/${user.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
+                                                    <a href={`/desa/${village.id}`} className="me-2 font-medium text-cyan-600 hover:underline dark:text-cyan-500">
                                                         Detail
                                                     </a>
-                                                    <button type="button" onClick={() => deleteConfirmation(user.id)} className="font-medium text-red-600 hover:underline dark:text-red-500">
+                                                    <button type="button" onClick={() => deleteConfirmation(village.id)} className="font-medium text-red-600 hover:underline dark:text-red-500">
                                                         Hapus
                                                     </button>
                                                 </div>
@@ -163,4 +169,4 @@ const UserIndex = () => {
     )
 }
 
-export default UserIndex
+export default VillageIndex

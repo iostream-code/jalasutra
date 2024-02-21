@@ -16,6 +16,9 @@ class Village extends Model
      */
     protected $fillable = [
         'name',
+        'head_village',
+        'region',
+        'address',
     ];
 
     public function profile()

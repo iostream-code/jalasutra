@@ -92,7 +92,7 @@ const ServiceTypeIndex = () => {
                                 serviceTypes.map((service, index) => {
                                     return (
                                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{index + 1}</Table.Cell>
+                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{service.id}</Table.Cell>
                                             <Table.Cell>{service.type}</Table.Cell>
                                             <Table.Cell>Non nulla reprehenderit fugiat elit reprehenderit ipsum. Consectetur labore ea in occaecat eu. Eu exercitation sit enim incididunt.</Table.Cell>
                                             <Table.Cell>

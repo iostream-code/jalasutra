@@ -21,7 +21,7 @@ const ServiceIndex = () => {
     }
 
     useEffect(() => {
-        fetchServices(url);
+        fetchServices(url)
     }, [])
 
     function deleteConfirmation(id) {
@@ -93,7 +93,7 @@ const ServiceIndex = () => {
                                 services.map((service, index) => {
                                     return (
                                         <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{index + 1}</Table.Cell>
+                                            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{service.id}</Table.Cell>
                                             <Table.Cell>{service.name}</Table.Cell>
                                             <Table.Cell>{service.type.type}</Table.Cell>
                                             <Table.Cell>{service.description}</Table.Cell>
