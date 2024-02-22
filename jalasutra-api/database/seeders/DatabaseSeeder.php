@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             ProfileSeeder::class,
             ServiceTypeSeeder::class,
             ServiceSeeder::class,
+            MailSeeder::class,
         ]);
     }
 }

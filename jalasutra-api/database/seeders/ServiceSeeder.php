@@ -54,6 +54,14 @@ class ServiceSeeder extends Seeder
                 'information' => 'Nisi et aliqua amet irure dolore dolor magna laboris.',
                 'contact' => '08123456789',
             ],
+            [
+                'fk_type_id' => 2,
+                'name' => 'Internal Wates',
+                'icon' => 'icons/service-logo-6.png',
+                'description' => 'Melayani segala kebutuhan surat-menyurat untuk warga masyarakat Wates.',
+                'information' => 'Nisi et aliqua amet irure dolore dolor magna laboris.',
+                'contact' => '08123456789',
+            ],
         ];
 
         Service::insert($data);
