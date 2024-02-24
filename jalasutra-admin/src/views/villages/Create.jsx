@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Button } from "flowbite-react"
+import { MdOutlineSaveAlt } from "react-icons/md"
 import Swal from "sweetalert2"
 import Api from "../../api"
 import Loader from "../../components/Loader"
 import Nav from "../../components/partial/Nav"
-import { Button } from "flowbite-react"
-import { MdOutlineSaveAlt } from "react-icons/md"
 
 const VillageCreate = () => {
     const [users, setUsers] = useState([])
@@ -18,7 +18,7 @@ const VillageCreate = () => {
 
     const navigate = useNavigate()
 
-    const url = "api/users"
+    const url = "/api/users"
 
     const fetchUsers = async (url) => {
         await Api.get(url)
@@ -59,8 +59,6 @@ const VillageCreate = () => {
                 setErrors(error.response.data)
             })
     }
-
-    console.log(users)
 
     if (!storeData || !users) {
         <div><Loader /></div>
@@ -109,6 +107,7 @@ const VillageCreate = () => {
                                         users &&
                                         users.map((user, index) => {
                                             return (
+                                                user.role === 'DESA' &&
                                                 <option key={index} value={user.profile.full_name}>{user.profile.full_name} - {user.role}</option>
                                             )
                                         })

@@ -16,12 +16,12 @@ class MailSeeder extends Seeder
         $data = [
             [
                 'fk_service_id' => 6,
-                'name' => 'Form Keterangan Tidak Mampu',
+                'name' => 'Surat Keterangan Tidak Mampu',
                 'form' => 'https://forms.gle/Pez37A9WJPhtPbKm9',
             ],
             [
                 'fk_service_id' => 6,
-                'name' => 'Form Izin Keramaian',
+                'name' => 'Surat Izin Keramaian',
                 'form' => 'https://forms.gle/Pez37A9WJPhtPbKm9',
             ],
         ];

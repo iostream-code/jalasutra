@@ -21,18 +21,6 @@ class Mail extends Model
         'form',
     ];
 
-    /**
-     * form
-     *
-     * @return Attribute
-     */
-    protected function form(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($form) => asset('/storage/mails/' . $form),
-        );
-    }
-
     public function service()
     {
         return $this->belongsTo(Service::class);
