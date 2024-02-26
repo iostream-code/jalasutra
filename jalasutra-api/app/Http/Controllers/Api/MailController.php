@@ -15,7 +15,7 @@ class MailController extends Controller
      */
     public function index()
     {
-        $mails = Mail::all();
+        $mails = Mail::with('service')->get();
 
         return new MailResource(true, "List of Mail", $mails);
     }

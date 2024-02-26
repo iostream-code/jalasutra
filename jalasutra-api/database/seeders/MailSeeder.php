@@ -16,7 +16,7 @@ class MailSeeder extends Seeder
         $data = [
             [
                 'fk_service_id' => 6,
-                'name' => 'Surat Keterangan Tidak Mampu',
+                'name' => 'Surat Keterangan Miskin',
                 'form' => 'https://forms.gle/Pez37A9WJPhtPbKm9',
             ],
             [

@@ -94,7 +94,7 @@ const MailIndex = () => {
                                             <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">{index + 1}</Table.Cell>
                                             <Table.Cell>{mail.name}</Table.Cell>
                                             <Table.Cell>
-                                                <a href={mail.form} className="inline-flex text-sm font-medium items-center text-blue-600 hover:underline">
+                                                <a href={mail.form} target="_blank" rel="noreferrer" className="inline-flex text-sm font-medium items-center text-blue-600 hover:underline">
                                                     <MdOutlineContentPasteSearch className="w-4 h-4 me-2" />
                                                     Form {mail.name}
                                                 </a>
