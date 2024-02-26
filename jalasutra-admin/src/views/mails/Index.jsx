@@ -57,8 +57,6 @@ const MailIndex = () => {
         fetchMails(url)
     }
 
-    console.log(mails)
-
     const parent = "surat"
     const child = null
 

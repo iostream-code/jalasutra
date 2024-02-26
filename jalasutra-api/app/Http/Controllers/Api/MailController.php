@@ -26,8 +26,8 @@ class MailController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'pk_service_id' => 'required',
-            'name' => 'required|max:20',
+            'fk_service_id' => 'required',
+            'name' => 'required|max:50',
             'form' => 'required'
         ], [
             // error message here..
@@ -38,7 +38,7 @@ class MailController extends Controller
         }
 
         $mail = Mail::create([
-            'pk_service_id' => $request->pk_service_id,
+            'fk_service_id' => $request->fk_service_id,
             'name' => $request->name,
             'form' => $request->form,
         ]);
@@ -51,7 +51,9 @@ class MailController extends Controller
      */
     public function show(Mail $mail)
     {
-        return new MailResource(true, 'Mail details !', $mail);
+        $mail_detail = Mail::with('service')->where('id', $mail->id)->first();
+
+        return new MailResource(true, 'Mail details !', $mail_detail);
     }
 
     /**
@@ -60,8 +62,8 @@ class MailController extends Controller
     public function update(Request $request, Mail $mail)
     {
         $validator = Validator::make($request->all(), [
-            'pk_service_id' => 'required',
-            'name' => 'required|max:20',
+            'fk_service_id' => 'required',
+            'name' => 'required|max:50',
             'form' => 'required'
         ], [
             // error message here..
@@ -72,7 +74,7 @@ class MailController extends Controller
         }
 
         $mail->update([
-            'pk_service_id' => $request->pk_service_id,
+            'fk_service_id' => $request->fk_service_id,
             'name' => $request->name,
             'form' => $request->form,
         ]);

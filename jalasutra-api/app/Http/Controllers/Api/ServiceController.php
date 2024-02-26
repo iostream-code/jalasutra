@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Service;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ServiceResource;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -16,7 +17,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::with('type')->latest()->paginate(5);
+        $services = Service::with('type')->latest()->paginate(10);
 
         return new ServiceResource(true, 'List of Service', $services);
     }

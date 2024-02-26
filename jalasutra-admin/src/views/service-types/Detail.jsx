@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import Api from "../../api"
-import Nav from "../../components/partial/Nav"
 import { Button } from "flowbite-react"
 import { MdOutlineEdit } from "react-icons/md"
+import Api from "../../api"
+import Nav from "../../components/partial/Nav"
 
 const ServiceTypeDetail = () => {
     const [types, setTypes] = useState([])
@@ -13,7 +13,7 @@ const ServiceTypeDetail = () => {
     const fetchDetailServiceType = async () => {
         await Api.get(`/api/service-types/${id}`)
             .then(response => {
-                setTypes(response.data.data);
+                setTypes(response.data.data)
             })
     }
 
