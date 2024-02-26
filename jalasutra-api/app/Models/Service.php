@@ -38,7 +38,7 @@ class Service extends Model
 
     public function mail()
     {
-        return $this->hasOne(Mail::class);
+        return $this->hasMany(Mail::class);
     }
 
     public function type()

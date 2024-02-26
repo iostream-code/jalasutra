@@ -42,7 +42,7 @@ const ServiceTypeEdit = () => {
     const successNotification = () => {
         Swal.fire({
             icon: "success",
-            title: "Jenis layanan berhasil ditambahkan.",
+            title: "Jenis layanan berhasil diubah.",
             showConfirmButton: false,
             timer: 1500
         });

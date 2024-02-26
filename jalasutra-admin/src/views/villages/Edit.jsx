@@ -115,6 +115,7 @@ const VillageEdit = () => {
                                         users &&
                                         users.map((user, index) => {
                                             return (
+                                                user.role === 'DESA' &&
                                                 <option key={index} value={user.profile.full_name}>{user.profile.full_name} - {user.role}</option>
                                             )
                                         })
