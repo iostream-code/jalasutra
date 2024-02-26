@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('mails', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('pk_service_id');
-            $table->foreign('pk_service_id')->references('id')->on('services')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('name')->nullable();
-            $table->string('form')->nullable();
+            $table->unsignedBigInteger('fk_service_id');
+            $table->foreign('fk_service_id')->references('id')->on('services')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('name');
+            $table->string('form');
+            // $table->string('description');
             $table->timestamps();
         });
     }

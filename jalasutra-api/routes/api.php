@@ -32,4 +32,5 @@ Route::apiResource('/users', UserController::class);
 Route::apiResource('/services', ServiceController::class);
 Route::apiResource('/service-types', ServiceTypeController::class);
 Route::apiResource('/villages', VillageController::class);
-Route::apiResource('/mails', MailController::class)->middleware('auth:api');
+// Route::apiResource('/mails', MailController::class)->middleware('auth:api');
+Route::apiResource('/mails', MailController::class);

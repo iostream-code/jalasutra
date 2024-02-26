@@ -24,6 +24,11 @@ import VillageCreate from "./views/villages/Create"
 import VillageDetail from "./views/villages/Detail"
 import VillageEdit from "./views/villages/Edit"
 
+import MailIndex from "./views/mails/Index"
+import MailCreate from "./views/mails/Create"
+import MailDetail from "./views/mails/Detail"
+import MailEdit from "./views/mails/Edit"
+
 import NotFound from "./views/error/NotFound"
 
 import 'flowbite'
@@ -54,6 +59,10 @@ function App() {
               <Route path="desa/tambah" element={<VillageCreate />} />
               <Route path="desa/:id" element={<VillageDetail />} />
               <Route path="desa/:id/ubah" element={<VillageEdit />} />
+              <Route path="surat" element={<MailIndex />} />
+              <Route path="surat/tambah" element={<MailCreate />} />
+              <Route path="surat/:id" element={<MailDetail />} />
+              <Route path="surat/:id/ubah" element={<MailEdit />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -16,26 +16,14 @@ class Mail extends Model
      * @var array
      */
     protected $fillable = [
-        'pk_service_id',
+        'fk_service_id',
         'name',
         'form',
     ];
 
-    /**
-     * form
-     *
-     * @return Attribute
-     */
-    protected function form(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($form) => asset('/storage/mails/' . $form),
-        );
-    }
-
     public function service()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Service::class, 'fk_service_id');
     }
 
     public function users()
