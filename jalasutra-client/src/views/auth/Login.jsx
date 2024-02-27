@@ -9,7 +9,7 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const [error, setError] = useState([]);
+    const [errors, setErrors] = useState([]);
 
     const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ const Login = () => {
             })
             .catch((error) => {
                 failedNotification();
-                setError(error.response.data);
+                setErrors(error.response.message);
             })
     }
 
@@ -61,9 +61,9 @@ const Login = () => {
                             <img src={Logo} className="w-36 md:w-48 mx-auto" alt="" />
                         </header>
                         {
-                            error.message && (
+                            errors.message && (
                                 <div className="p-4 mt-2 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
-                                    <span className="font-semibold">Perhatian!</span> {error.message}
+                                    <span className="font-semibold">Perhatian!</span> {errors.message}
                                 </div>
                             )
                         }

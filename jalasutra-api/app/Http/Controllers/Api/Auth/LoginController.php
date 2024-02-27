@@ -29,7 +29,7 @@ class LoginController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Login Gagal!',
+                'message' => 'Login Gagal! Periksa kembali akun Anda.',
             ]);
         }
 
