@@ -43,7 +43,6 @@ const Login = () => {
             .then((response) => {
                 successNotification();
                 localStorage.setItem('token', response.data.token);
-                console.log(response.data.data.role);
                 navigate('/');
             })
             .catch((error) => {

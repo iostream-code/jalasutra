@@ -24,7 +24,10 @@ class LoginController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where([
+            'email' => $request->email,
+            // 'password' => $request->password
+        ])->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json([
