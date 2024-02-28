@@ -16,7 +16,7 @@ class ServiceTypeController extends Controller
      */
     public function index()
     {
-        $service_types = ServiceType::latest()->paginate(5);
+        $service_types = ServiceType::latest()->paginate(10);
 
         return new ServiceResource(true, 'List of Service Type', $service_types);
     }
